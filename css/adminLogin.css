@@ -18,3 +18,8 @@
 .link-page {
   text-decoration: none !important;
 }
+
+.error {
+  color: red;
+  font-weight: bold;
+}
