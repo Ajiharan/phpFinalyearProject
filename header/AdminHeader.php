@@ -26,7 +26,7 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Report</a>
+        <a class="nav-link" href="#">About us</a>
       </li>
      
     </ul>
@@ -35,7 +35,7 @@
         <a class="nav-link" href="#">Hi Admin</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="-1">Logout</a>
+        <a class="nav-link" href="#" tabindex="-1">sign-in</a>
       </li>    
     <ul>
   </div>

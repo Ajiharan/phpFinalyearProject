@@ -1,0 +1,20 @@
+.login__container {
+  display: grid;
+  place-items: center;
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
+
+.login__form {
+  opacity: 0.8;
+  color: white;
+  padding: 20px;
+  min-width: 340px;
+  min-height: 350px;
+  background-color: black;
+  box-shadow: 2px 1px 14px 1px #3a3939;
+}
+
+.link-page {
+  text-decoration: none !important;
+}

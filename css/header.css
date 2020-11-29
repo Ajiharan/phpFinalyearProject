@@ -8,6 +8,13 @@ body {
   padding: 0;
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
 .header__logo {
   width: 50px;
   object-fit: contain;
