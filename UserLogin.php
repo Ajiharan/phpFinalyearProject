@@ -41,12 +41,12 @@
                         type:"post",
                         data:$("#frm").serialize(),
                         success:function(d){
+                          document.querySelector("#frm").reset();
                         if(d==200){
-                            $("#log_error").text("");
-                            document.querySelector("#frm").reset();
+                            $("#log_error").text("");               
                             window.location.replace("./AdminHome.php");
                         }else{
-                        $("#log_error").text("!!Invalid email_id or password");
+                          $("#log_error").text("!!Invalid email_id or password");
                             // alert("Invalid");
                         }
                         
