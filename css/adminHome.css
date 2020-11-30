@@ -4,7 +4,7 @@
 
 .adminHome__FormContainer {
   background-color: black;
-  max-width: 400px;
+
   padding: 20px;
   opacity: 0.89;
   border-radius: 20px;
@@ -13,4 +13,17 @@
 .error {
   color: red;
   font-weight: bold;
+}
+
+.table-responsive::-webkit-scrollbar {
+  width: 0.01rem;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: rgb(37, 36, 36);
+  outline: 1px solid rgb(36, 37, 37);
 }

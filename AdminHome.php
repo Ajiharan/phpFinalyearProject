@@ -23,7 +23,7 @@ if(!isset($_SESSION['aid'])){
         ?>
         <div class="container-fluid adminHome">
             <div class="row">
-                <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-4 col-sm-12 ">
                     <div class="adminHome__FormContainer">
                     <h6 class="text-center text-danger" id="log_error"></h6>
                     <h6 class="text-center text-success" id="log_success"></h6>
@@ -46,12 +46,12 @@ if(!isset($_SESSION['aid'])){
                         </form>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-8 col-sm-12 ">
                     <div class="user-table table-responsive">
                         <h4 class="text-dark text-center">Employee leave Details</h4>
                         <script>
                             $(document).ready(function(){
-                                setInterval(function(){
+                               
                                     $.ajax({
                                         url:"./server/AdminViewUserDetails.php",
                                         type:"GET",
@@ -60,7 +60,7 @@ if(!isset($_SESSION['aid'])){
                                             $(".user-table").html(d);                             
                                         }
                                     });
-                                },1000);           
+                                  
                             });
                         </script>
                     </div>
@@ -69,6 +69,18 @@ if(!isset($_SESSION['aid'])){
         </div>
         <script src="js/jquery.js"></script>
         <script src="js/jquery.validate.js"></script>
+        <script>
+             function getUserData(){
+                $.ajax({
+                    url:"./server/AdminViewUserDetails.php",
+                        type:"GET",
+                        dataType: "html",               
+                        success:function(d){
+                        $(".user-table").html(d);                             
+                    }
+                }); 
+            }
+        </script>
         <script>
             $(document).ready(function(){          
             $.validator.setDefaults({
@@ -81,7 +93,8 @@ if(!isset($_SESSION['aid'])){
                         document.querySelector("#frm").reset();
                         if(d==200){
                             $("#log_error").text("");
-                            $("#log_success").text("Sucessfullly Added");          
+                            $("#log_success").text("Sucessfullly Added");   
+                            getUserData();
                            
                         }else{
                             $("#log_error").text(d);
@@ -122,6 +135,58 @@ if(!isset($_SESSION['aid'])){
                 }
             });
             });
+          </script>
+          <script>
+            function updateDetails(id,aid){
+                $message="";
+                if(aid==1){
+                    $message="user account is activated"
+                }else{
+                    $message="user account is deactivated"
+                }
+            $.ajax({
+                url:"./server/userUpdate.php",
+                type:"POST",
+                data:{id:id,aid:aid},            
+                success:function(d){
+                    getUserData();
+                     swal({
+                        title: d,
+                        text: $message,
+                        icon: "success",
+                        button: "ok",
+                    });
+                                    
+                }
+                });
+            }
+            
+
+            function deleteUserDetails(id){
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this user data!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url:"./server/deleteUser.php",
+                            type:"POST",
+                            data:{id:id},            
+                            success:function(d){
+                                getUserData();
+                                swal("Poof! Your imaginary file has been deleted!", {icon: "success",});                       
+                            }
+                        });
+                      
+                    } else {
+                        swal("Your user data is safe!");
+                    }
+                });              
+            }
          </script>
     </body>
     </html>
