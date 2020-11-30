@@ -91,16 +91,20 @@ if(!isset($_SESSION['aid'])){
                         data:$("#frm").serialize(),
                         success:function(d){
                         document.querySelector("#frm").reset();
-                        if(d==200){
-                            $("#log_error").text("");
-                            $("#log_success").text("Sucessfullly Added");   
-                            getUserData();
-                           
-                        }else{
-                            $("#log_error").text(d);
-                            $("#log_success").text("");          
-                                document.querySelector("#frm").reset();
-                        }
+                            if(d==200){
+                                $("#log_error").text("");
+                                $("#log_success").text("Sucessfullly Added");   
+                                getUserData();
+                            
+                            }else if(d==403){
+                                $("#log_error").text("email id already exists");
+                                $("#log_success").text("");      
+                            }
+                            else{
+                                $("#log_error").text(d);
+                                $("#log_success").text("");          
+                                
+                            }
                         
                         }
                     });
