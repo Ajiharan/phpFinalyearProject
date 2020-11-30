@@ -8,11 +8,12 @@
 </head>
 <body>
 <?php 
-    include('./header/UserHeader.php')
+    include('./header/AdminHeader.php')
   ?>   
   <div class="login__container">
     <div class="login__form">
       <h5 class="text-center text-info">User Sign-in Form</h5>
+      <h6 class="text-center text-danger" id="log_error"></h6>
       <form id="frm">
         <div class="form-group">
           <label>Email Id</label>
@@ -23,7 +24,7 @@
           <input type="password" name="pass" id="pass" class="form-control" placeholder="Enter your password"/>
         </div>
         <input type="submit" class="btn btn-dark btn-block mt-4" value="Signin"/>
-        <p class="text-light text-center mt-2"><a class="link-page" href="./AdminLogin.php">Login as Admin</a> </p>
+        <p class="text-light text-center mt-2"><a class="link-page" href="./adminLogin.php">Login as Admin</a> </p>
         <p> <a class="link-page" href="#">Conditions of Use and Privacy Notice</a></p> 
       </form>
     </div>
@@ -35,23 +36,22 @@
      
       $.validator.setDefaults({
 	      	submitHandler: function() {
-                submitHandler: function() {
-                    $.ajax({
-                        url:"./server/adminLogin.php",
-                        type:"post",
-                        data:$("#frm").serialize(),
-                        success:function(d){
-                          document.querySelector("#frm").reset();
-                        if(d==200){
-                            $("#log_error").text("");               
-                            window.location.replace("./AdminHome.php");
-                        }else{
-                          $("#log_error").text("!!Invalid email_id or password");
-                            // alert("Invalid");
-                        }
-                        
-                        }
-                    });         
+            $.ajax({
+                url:"./server/userLogin.php",
+                type:"post",
+                data:$("#frm").serialize(),
+                success:function(d){
+                  document.querySelector("#frm").reset();
+                  if(d==200){
+                    $("#log_error").text("");     
+                     window.location.replace("./AdminHome.php");
+                  }else{
+                  $("#log_error").text("!!Invalid email_id or password");
+                    document.querySelector("#frm").reset();
+                  }
+                 
+                }
+              });
             
             }
       });

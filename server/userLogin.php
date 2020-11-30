@@ -8,9 +8,9 @@
     $email=$_POST['email'];
     $pass=$_POST['pass'];
     try{
-        $sql="select * from Users where emailId=? and password=? and UserType=?";
+        $sql="select * from users where emailId=? and password=? and UserType=?";
         $res=$con->prepare($sql);
-        $res->execute([$email,$pass,2]);
+        $res->execute([$email,$pass,1]);
         $tot=$res->rowCount();
         if($tot > 0){
             $login_user=$res->fetch();
@@ -21,8 +21,7 @@
         }else{
            echo 400;
         }
-   
-        
+
     }catch(PDOException $e){
         echo "Error".$e->getMessage();
     }

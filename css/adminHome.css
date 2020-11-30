@@ -1,0 +1,16 @@
+.adminHome {
+  margin-top: 100px;
+}
+
+.adminHome__FormContainer {
+  background-color: black;
+  max-width: 400px;
+  padding: 20px;
+  opacity: 0.89;
+  border-radius: 20px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}

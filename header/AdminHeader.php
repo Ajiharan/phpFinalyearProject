@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,11 +33,15 @@
      
     </ul>
     <ul class="navbar-nav">
-    <li class="nav-item">
-        <a class="nav-link" href="#">Hi Admin</a>
-      </li>
+    <li class="nav-item"><a class="nav-link" href="#">
+    <?php
+     if(isset($_SESSION['uname'])) { ?>
+        Hi 
+     <?php echo $_SESSION['uname'];
+    } ?>
+    </a></li>
       <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="-1">sign-in</a>
+        <?php if(isset($_SESSION['uname'])){ ?><a class="nav-link" href="../phpFinalYearProject/server/logout.php" tabindex="-1">Logout</a>  <?php }else{?> <a class="nav-link" href="./AdminLogin.php" tabindex="-1">SignIn</a><?php }?>
       </li>    
     <ul>
   </div>

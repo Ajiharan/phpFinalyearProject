@@ -1,3 +1,12 @@
+<?php
+if(isset($_SESSION['aid'])){
+    
+  header("Location:./AdminHome.php"); 
+  exit();
+} 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
