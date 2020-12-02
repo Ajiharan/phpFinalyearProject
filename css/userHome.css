@@ -9,3 +9,9 @@
   margin-right: 0px !important;
   margin-top: 80px;
 }
+
+.cardContainer {
+  width: 100%;
+  margin-left: 22px;
+  margin-right: 75px;
+}

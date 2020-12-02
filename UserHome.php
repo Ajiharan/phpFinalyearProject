@@ -55,9 +55,18 @@ if(!isset($_SESSION['aid'])){
                     
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Suppliers</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
+                                <div class="card-header text-center">Suppliers</div>
+                                    <div class="card-body text-center">
+                                        
+                                        <button class="btn btn-danger">Add Suppliers</button>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                                <div class="card-header text-center">Materials</div>
+                                    <div class="card-body text-center">
                                         <button class="btn btn-danger">Add Materials</button>
                                     </div>
                                 </div>
@@ -65,124 +74,106 @@ if(!isset($_SESSION['aid'])){
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Materials</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Clients</div>
+                                    <div class="card-body text-center">
+                                        <button class="btn btn-danger">Add Clients</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Clients</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Tenders</div>
+                                    <div class="card-body text-center">
+                                        <button class="btn btn-danger">Add Tenders</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Tenders</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Awarded Projects</div>
+                                    <div class="card-body text-center">
+                                        <button class="btn btn-danger">Add projects</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Awarded Projects</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Bills</div>
+                                    <div class="card-body text-center">
+                                        <button class="btn btn-danger">Add Bills</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Bills</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Labours</div>
+                                    <div class="card-body text-center">
+                                        <button class="btn btn-danger">Add Labours</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Labours</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Machineries</div>
+                                    <div class="card-body text-center">
+                                    <button class="btn btn-danger">Add Machineries</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Machineries</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Store Items</div>
+                                    <div class="card-body text-center">
+                                        <button class="btn btn-danger">Add Store Items</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Store Items</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Material Purchase</div>
+                                    <div class="card-body text-center">
+                                        <button class="btn btn-danger">Add Material Purchase</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Material Purchase</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Labour payment</div>
+                                    <div class="card-body text-center">
+                                    <button class="btn btn-danger">Add Labour payment</button>
                                     </div>
                                 </div>
                             
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Labour payment</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="card-header text-center">Machinery Rents</div>
+                                    <div class="card-body text-center">
+                                        <button class="btn btn-danger">Add Machinery Rents</button>
                                     </div>
                                 </div>
                             
                         </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Machinery Rents</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                       <div class="cardContainer">
+                       
+                                <div class="card text-white bg-dark mb-3" style="min-width: 20rem;">
+                                    <div class="card-header text-center text-center">Other Expenses</div>
+                                        <div class="card-body text-center">
+                                            <button class="btn btn-danger">Add other Expenses</button>
+                                        </div>
                                     </div>
-                                </div>
-                            
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Other Expenses</div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Dark card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                            
-                        </div>
+                                
+                         
+
+                       </div>
                         
                     </div>
                 </div>
