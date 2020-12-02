@@ -75,7 +75,7 @@ if(!isset($_SESSION['aid'])){
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                 <div class="card-header text-center">Clients</div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-danger">Add Clients</button>
+                                    <a href="./Client.php"> <button class="btn btn-danger">Add Clients</button></a>
                                     </div>
                                 </div>
                             
