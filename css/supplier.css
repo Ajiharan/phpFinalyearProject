@@ -1,0 +1,16 @@
+.userSupplier {
+  margin-top: 100px;
+}
+
+.userSupplier__FormContainer {
+  background-color: black;
+  padding: 20px;
+  opacity: 0.82;
+  box-shadow: 1px 1px 13px 3px #292525;
+  margin-bottom: 40px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
