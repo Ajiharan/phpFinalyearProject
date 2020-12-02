@@ -45,12 +45,26 @@ if(!isset($_SESSION['aid'])){
                                 <label class="text-light">Vehicle no</label>
                                 <input type="text" name="vno" id="vno" class="form-control" placeholder="Enter Vehicle no"/>
                             </div>
-                            <input type="submit" class="btn btn-dark btn-block mt-4" value="Add Supplier"/>
                            
+                            <input type="hidden" id="id" name="id" value="0"/>
+                            <div class="mybutton">
+                                <input type="submit" class="btn btn-dark btn-block m-4 addBtn" value="Add Supplier"/>
+                                <input type="button" onclick='clearField()' class="btn btn-danger btn-block m-4 hideBtn" value="Cancel"/>
+
+                            </div>
                         </form>
                     </div>
                 </div>
                 <script>
+
+                    function clearField(){
+                       $('#frm')[0].reset();
+                       $('#id').val("0")
+                        $(".addBtn").addClass("btn-dark");
+                        $(".addBtn").val("Add Supplier");
+                        $(".addBtn").removeClass("btn-success");
+                        $('.hideBtn').hide();
+                    }
                      function getSuppliersData(){
                             $(document).ready(function(){
                                
@@ -80,7 +94,6 @@ if(!isset($_SESSION['aid'])){
 <script src="js/jquery.validate.js"></script>
 <script>
    
-
      function deleteSupplierDetails(id){
                 swal({
                     title: "Are you sure?",
@@ -105,33 +118,58 @@ if(!isset($_SESSION['aid'])){
                         swal("Your user data is safe!");
                     }
                 });              
-            }
+        }
 
 </script>
+
 <script>
     $(document).ready(function(){
+        $('.hideBtn').hide();
      
       $.validator.setDefaults({
 	      	submitHandler: function() {
-            $.ajax({
-                url:"./server/AddSupplier.php",
-                type:"post",
-                data:$("#frm").serialize(),
-                success:function(d){
-                  document.querySelector("#frm").reset();
-                  if(d==200){
-                    getSuppliersData();
-                    $("#log_error").text("");
-                    $("#log_success").text("Sucessfullly Added");   
-                    
-                  }else{
-                  $("#log_error").text(d);
-                  $("#log_success").text("");   
-                    
-                  }
-                 
-                }
-              });
+                  $id=$('#id').val();
+                  if($id=="0"){
+                    $.ajax({
+                        url:"./server/AddSupplier.php",
+                        type:"post",
+                        data:$("#frm").serialize(),
+                        success:function(d){
+                        document.querySelector("#frm").reset();
+                        if(d==200){
+                            getSuppliersData();
+                            $("#log_error").text("");
+                            $("#log_success").text("Sucessfullly Added");   
+                            
+                        }else{
+                            $("#log_error").text(d);
+                            $("#log_success").text("");   
+                            
+                        }
+                        
+                        }
+                    });
+                    }else{
+                        $.ajax({
+                            url:"./server/updateSupplier.php",
+                            type:"POST",
+                            data:$("#frm").serialize(),            
+                            success:function(d){
+                                getSuppliersData();
+                                clearField();
+                                swal({
+                                    title: d,
+                                    text: "updated",
+                                    icon: "success",
+                                    button: "ok",
+                                });
+                                                
+                            }
+                        });
+
+
+                    }
+          
             
             }
       });
@@ -169,6 +207,25 @@ if(!isset($_SESSION['aid'])){
         }
       });
     });
+  </script>
+  <script>
+      function editSupplierDetails(id){
+            var row=$('.'+id);
+            $("#id").val(id);
+            var name=row.closest("tr").find("td:eq(0)").text();
+            var address=row.closest("tr").find("td:eq(1)").text();
+            var phone=row.closest("tr").find("td:eq(2)").text();
+            var vno=row.closest("tr").find("td:eq(3)").text();
+            $('.hideBtn').show();
+           $("#uname").val(name);
+           $("#pno").val(phone);
+           $("#address").val(address);
+           $('#vno').val(vno);
+           $('.addBtn').val('Update')
+           $(".addBtn").removeClass("btn-dark");
+           $(".addBtn").addClass("btn-success")
+
+      }
   </script>
 </body>
 </html>

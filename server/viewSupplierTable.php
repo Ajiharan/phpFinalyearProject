@@ -34,7 +34,7 @@
             <td>".$row->phone."</td>
             <td>".$row->vehicleNo."</td>";
     
-             $result.="<td><button class='btn btn-warning' 
+             $result.="<td><button class='btn btn-warning ".$row->id."' ' onclick='editSupplierDetails($row->id)'
                >Edit</button></td>";        
           
             $result.="<td><button class='btn btn-danger' onclick='deleteSupplierDetails($row->id)' >Delete</button></td>

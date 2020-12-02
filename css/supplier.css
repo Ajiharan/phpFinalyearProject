@@ -14,3 +14,7 @@
   color: red;
   font-weight: bold;
 }
+
+.mybutton {
+  display: flex;
+}
