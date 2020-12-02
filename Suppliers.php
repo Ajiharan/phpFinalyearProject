@@ -50,16 +50,64 @@ if(!isset($_SESSION['aid'])){
                         </form>
                     </div>
                 </div>
+                <script>
+                     function getSuppliersData(){
+                            $(document).ready(function(){
+                               
+                               $.ajax({
+                                   url:"./server/viewSupplierTable.php",
+                                   type:"GET",
+                                   dataType: "html",               
+                                   success:function(d){
+                                       $(".user-table").html(d);                             
+                                   }
+                               });
+                             
+                       });
+                      }
+                </script>
                 <div class="col-md-8 col-sm-12 ">
                     <div class="user-table table-responsive">
                         <h4 class="text-dark text-center">Supplier  Details</h4>
-                       
+                        <script>
+                            getSuppliersData();
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
 <script src="js/jquery.js"></script>
 <script src="js/jquery.validate.js"></script>
+<script>
+   
+
+     function deleteSupplierDetails(id){
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this user data!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url:"./server/deleteSupplier.php",
+                            type:"POST",
+                            data:{id:id},            
+                            success:function(d){
+                                getSuppliersData();
+                                swal("Poof! Your imaginary file has been deleted!", {icon: "success",});                       
+                            }
+                        });
+                      
+                    } else {
+                        swal("Your user data is safe!");
+                    }
+                });              
+            }
+
+</script>
 <script>
     $(document).ready(function(){
      
@@ -72,6 +120,7 @@ if(!isset($_SESSION['aid'])){
                 success:function(d){
                   document.querySelector("#frm").reset();
                   if(d==200){
+                    getSuppliersData();
                     $("#log_error").text("");
                     $("#log_success").text("Sucessfullly Added");   
                     
