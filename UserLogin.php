@@ -44,7 +44,7 @@
                   document.querySelector("#frm").reset();
                   if(d==200){
                     $("#log_error").text("");     
-                     window.location.replace("./AdminHome.php");
+                     window.location.replace("./UserHome.php");
                   }else{
                   $("#log_error").text("!!Invalid email_id or password");
                     document.querySelector("#frm").reset();

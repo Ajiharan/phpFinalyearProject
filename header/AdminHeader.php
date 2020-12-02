@@ -33,9 +33,9 @@
      
     </ul>
     <ul class="navbar-nav">
-    <li class="nav-item"><a class="nav-link" href="#">
+ 
     <?php
-     if(isset($_SESSION['uname'])) { ?>
+     if(isset($_SESSION['uname'])) { ?><a class="nav-link" href="#">
         Hi 
      <?php echo $_SESSION['uname'];
     } ?>
