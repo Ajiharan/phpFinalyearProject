@@ -20,8 +20,7 @@
     </thead> 
     <tbody>";
  try{
-     $active=1;
-     $deactive=0;
+   
     $sql="select * from tenders";
     $res=$con->prepare($sql);
     $res->execute();

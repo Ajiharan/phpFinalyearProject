@@ -127,7 +127,7 @@ if(!isset($_SESSION['aid'])){
 <script src="js/jquery.validate.js"></script>
 <script>
    
-     function deleteProjectDetails(id){
+     function deleteProjectDetails(id,tid){
                 swal({
                     title: "Are you sure?",
                     text: "Once deleted, you will not be able to recover this user data!",
@@ -140,7 +140,7 @@ if(!isset($_SESSION['aid'])){
                         $.ajax({
                             url:"./server/deleteAwardedproject.php",
                             type:"POST",
-                            data:{id:id},            
+                            data:{id:id,tid:tid},            
                             success:function(d){
                                 getAwardedprojectData();
                                 swal("Poof! Your imaginary file has been deleted!", {icon: "success",});                       

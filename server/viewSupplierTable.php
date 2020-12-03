@@ -19,8 +19,7 @@
     </thead> 
     <tbody>";
  try{
-     $active=1;
-     $deactive=0;
+   
     $sql="select * from suppliers";
     $res=$con->prepare($sql);
     $res->execute();

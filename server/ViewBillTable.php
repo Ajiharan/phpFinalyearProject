@@ -9,18 +9,18 @@
     $result="<table class='table table-borderless  table-hover table-dark mt-4'>
     <thead class='thead-dark'>
         <tr>    
-            <th scope='col'>Name</th>
-            <th scope='col'>Address</th>
-            <th scope='col'>Phone</th>
-            <th scope='col'>Email id</th>
+            <th scope='col'>Project id</th>
+            <th scope='col'>Bill Number</th>
+            <th scope='col'>Received Amount</th>
+            <th scope='col'>Received Date</th> 
             <th scope='col'>Edit</th>
             <th scope='col'>Delete</th>
         </tr>
     </thead> 
     <tbody>";
  try{
-   
-    $sql="select * from clients";
+    
+    $sql="select * from bills";
     $res=$con->prepare($sql);
     $res->execute();
     $tot=$res->rowCount();
@@ -28,15 +28,16 @@
         $supplier=$res->fetchAll();
        foreach( $supplier as $row){
         $result.= "<tr>
-            <td>".$row->name."</td>
-            <td>".$row->address."</td>
-            <td>".$row->phone."</td>
-            <td>".$row->email."</td>";
+            <td>".$row->projectId."</td>
+            <td>".$row->billNo."</td>
+            <td>".$row->receivedAmount."</td>
+            <td>".$row->receivedDate."</td>";
+          
     
-             $result.="<td><button class='btn btn-warning ".$row->id."' ' onclick='editSupplierDetails($row->id)'
+             $result.="<td><button class='btn btn-warning ".$row->id."' ' onclick='editBillDetails($row->id)'
                >Edit</button></td>";        
           
-            $result.="<td><button class='btn btn-danger' onclick='deleteSupplierDetails($row->id)' >Delete</button></td>
+            $result.="<td><button class='btn btn-danger' onclick='deleteBillDetails($row->id)' >Delete</button></td>
             <tr/>";   
        }
       $result.="

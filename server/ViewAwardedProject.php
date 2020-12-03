@@ -21,8 +21,7 @@
     </thead> 
     <tbody>";
  try{
-     $active=1;
-     $deactive=0;
+    
     $sql="select * from awardedprojects";
     $res=$con->prepare($sql);
     $res->execute();
@@ -41,7 +40,7 @@
              $result.="<td><button class='btn btn-warning ".$row->id."' ' onclick='editProjectDetails($row->id)'
                >Edit</button></td>";        
           
-            $result.="<td><button class='btn btn-danger' onclick='deleteProjectDetails($row->id)' >Delete</button></td>
+            $result.="<td><button class='btn btn-danger' onclick='deleteProjectDetails($row->id,$row->tenderId)' >Delete</button></td>
             <tr/>";   
        }
       $result.="
