@@ -13,10 +13,20 @@
         $address=$_POST['address'];
         $email=$_POST['email'];
 
+        $sql1="select * from clients where name=?";
+        $res1=$con->prepare($sql1);
+        $res1->execute([$name]);
+        $tot1=$res1->rowCount();  
+        
+        if($tot1 > 0){
+            echo "sorry name already exists";
+        }else{
             $sql="insert into clients(name,address,phone,email) values(?,?,?,?)";
             $res=$con->prepare($sql);
             $res->execute([$name,$address,$pno,$email]);        
-            echo 200;          
+            echo 200;     
+        }
+            
            
     }catch(PDOException $e){
         

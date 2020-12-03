@@ -1,3 +1,13 @@
+<?php 
+session_start();
+if(isset($_SESSION['aid'])){
+    
+    header("Location:./UserHome.php"); 
+    exit();
+} 
+  
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

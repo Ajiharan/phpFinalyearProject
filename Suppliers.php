@@ -2,7 +2,7 @@
 session_start();
 if(!isset($_SESSION['aid'])){
     
-    header("Location:./userLogin.php"); 
+    header("Location:./UserLogin.php"); 
     exit();
 } 
   

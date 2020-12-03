@@ -2,7 +2,7 @@
 session_start();
 if(!isset($_SESSION['aid'])){
     
-    header("Location:./userLogin.php"); 
+    header("Location:./UserLogin.php"); 
     exit();
 } 
   
@@ -84,7 +84,7 @@ if(!isset($_SESSION['aid'])){
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                 <div class="card-header text-center">Tenders</div>
                                     <div class="card-body text-center">
-                                        <button class="btn btn-danger">Add Tenders</button>
+                                    <a href="./Tenders.php"><button class="btn btn-danger">Add Tenders</button></a>
                                     </div>
                                 </div>
                             
