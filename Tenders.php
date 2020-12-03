@@ -36,7 +36,7 @@ if(!isset($_SESSION['aid'])){
 
                                     include('./server/DBConnection.php');
                                     $result="<option value=''>select</option>";
-                                    echo $result;
+                                   
                                     try{
                                         $sql="select * from clients";
                                         $res=$con->prepare($sql);
