@@ -130,7 +130,7 @@ if(!isset($_SESSION['aid'])){
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                 <div class="card-header text-center">Labour payment</div>
                                     <div class="card-body text-center">
-                                    <button class="btn btn-danger">Add Labour payment</button>
+                                    <a href="./LabourPayment.php"><button class="btn btn-danger">Add Labour payment</button></a>
                                     </div>
                                 </div>
                             
