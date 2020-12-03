@@ -116,24 +116,7 @@ if(!isset($_SESSION['aid'])){
                                 </div>
                             
                         </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header text-center">Machineries</div>
-                                    <div class="card-body text-center">
-                                    <button class="btn btn-danger">Add Machineries</button>
-                                    </div>
-                                </div>
-                            
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header text-center">Store Items</div>
-                                    <div class="card-body text-center">
-                                        <button class="btn btn-danger">Add Store Items</button>
-                                    </div>
-                                </div>
-                            
-                        </div>
+                       
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                 <div class="card-header text-center">Material Purchase</div>
@@ -152,18 +135,19 @@ if(!isset($_SESSION['aid'])){
                                 </div>
                             
                         </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header text-center">Machinery Rents</div>
-                                    <div class="card-body text-center">
-                                        <button class="btn btn-danger">Add Machinery Rents</button>
-                                    </div>
-                                </div>
-                            
-                        </div>
-                       <div class="cardContainer">
                        
-                                <div class="card text-white bg-dark mb-3" style="min-width: 20rem;">
+                       <div class="cardContainer">
+                            
+                                    <div class="card text-white bg-dark mb-3" style="min-width: 25rem;">
+                                        <div class="card-header text-center">Machinery Rents</div>
+                                            <div class="card-body text-center">
+                                                <button class="btn btn-danger">Add Machinery Rents</button>
+                                            </div>
+                                        </div>
+                                    
+                              
+                       
+                                <div class="card text-white bg-dark mb-3" style="min-width: 25rem;">
                                     <div class="card-header text-center text-center">Other Expenses</div>
                                         <div class="card-body text-center">
                                             <button class="btn btn-danger">Add other Expenses</button>
