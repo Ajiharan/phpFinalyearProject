@@ -93,7 +93,7 @@ if(!isset($_SESSION['aid'])){
                        $('#frm')[0].reset();
                        $('#id').val("0")
                         $(".addBtn").addClass("btn-dark");
-                        $(".addBtn").val("Add Client");
+                        $(".addBtn").val("Add Bills");
                         $(".addBtn").removeClass("btn-success");
                         $('.hideBtn').hide();
                     }
