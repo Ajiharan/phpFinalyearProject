@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2020 at 04:55 PM
+-- Generation Time: Dec 04, 2020 at 08:53 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -90,6 +90,16 @@ CREATE TABLE `expensetype` (
   `type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `expensetype`
+--
+
+INSERT INTO `expensetype` (`id`, `type`) VALUES
+(3, ' Machinery Rent'),
+(1, ' Material Purchase'),
+(2, 'Labour Charges'),
+(4, 'Other Expenses');
+
 -- --------------------------------------------------------
 
 --
@@ -102,7 +112,7 @@ CREATE TABLE `labourpayment` (
   `labourId` bigint(20) NOT NULL,
   `noOfWorkers` int(11) NOT NULL,
   `payment` double NOT NULL,
-  `paidOn` double NOT NULL
+  `paidOn` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -129,6 +139,14 @@ CREATE TABLE `machineries` (
   `id` bigint(20) NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `machineries`
+--
+
+INSERT INTO `machineries` (`id`, `name`) VALUES
+(1, 'Roller'),
+(2, 'JCB');
 
 -- --------------------------------------------------------
 
@@ -171,6 +189,13 @@ CREATE TABLE `materials` (
   `name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `materials`
+--
+
+INSERT INTO `materials` (`id`, `name`) VALUES
+(5, 'cotton');
+
 -- --------------------------------------------------------
 
 --
@@ -195,6 +220,14 @@ CREATE TABLE `storeitems` (
   `id` bigint(20) NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `storeitems`
+--
+
+INSERT INTO `storeitems` (`id`, `name`) VALUES
+(1, 'Water tank'),
+(2, 'Driller');
 
 -- --------------------------------------------------------
 
@@ -247,7 +280,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `emailId`, `password`, `isActive`, `userType`) VALUES
 (1, 'admin', 'admin@gmail.com', 'admin', 1, 2),
-(12, 'haran', 'haran@gmail.com', 'haran', 0, 1);
+(12, 'haran', 'haran@gmail.com', 'haran', 1, 1),
+(15, 'nimal', 'nimal@gmail.com', '1111', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -278,8 +312,7 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `expenses`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_ExpensesprojectId` (`projectId`),
-  ADD KEY `FK_expenseType` (`expenseType`);
+  ADD KEY `FK_ExpensesprojectId` (`projectId`);
 
 --
 -- Indexes for table `expensetype`
@@ -369,91 +402,91 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `awardedprojects`
 --
 ALTER TABLE `awardedprojects`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `labourpayment`
 --
 ALTER TABLE `labourpayment`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `labours`
 --
 ALTER TABLE `labours`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `machineries`
 --
 ALTER TABLE `machineries`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `machineryrents`
 --
 ALTER TABLE `machineryrents`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `materialpurchase`
 --
 ALTER TABLE `materialpurchase`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `othertypes`
 --
 ALTER TABLE `othertypes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `storeitems`
 --
 ALTER TABLE `storeitems`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tenders`
 --
 ALTER TABLE `tenders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -475,8 +508,7 @@ ALTER TABLE `bills`
 -- Constraints for table `expenses`
 --
 ALTER TABLE `expenses`
-  ADD CONSTRAINT `FK_ExpensesprojectId` FOREIGN KEY (`projectId`) REFERENCES `awardedprojects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_expenseType` FOREIGN KEY (`expenseType`) REFERENCES `expensetype` (`type`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_ExpensesprojectId` FOREIGN KEY (`projectId`) REFERENCES `awardedprojects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `labourpayment`
