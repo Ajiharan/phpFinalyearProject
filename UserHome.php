@@ -57,7 +57,7 @@ if(!isset($_SESSION['aid'])){
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                 <div class="card-header text-center">Suppliers</div>
                                     <div class="card-body text-center">
-                                        <a href="./Suppliers.php"><button class="btn btn-danger">Add Awarded Projects</button></a>
+                                        <a href="./Suppliers.php"><button class="btn btn-danger">Add Suppliers</button></a>
                                     </div>
                                 </div>
                             

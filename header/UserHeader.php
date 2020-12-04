@@ -26,7 +26,20 @@
         <a class="nav-link" href="../../phpFinalYearProject/UserHome.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About us</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Views & Entries</a>
+        <div class="dropdown-menu drp" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="../../phpFinalYearProject/Suppliers.php"> Suppliers</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/Material.php">Materials</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/Client.php">Clients</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/Tenders.php">Tenders</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/AwardedProject.php">projects</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/Bills.php">Labours</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/Labours.php">Bills</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/MaterialPurchase.php">Material Purchase</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/LabourPayment.php">Labour payment</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/MachineryRent.php">Machinery Rents</a>
+          <a class="dropdown-item" href="../../phpFinalYearProject/Other.php">Other Expenses</a>
+      </div>
       </li>
      
     </ul>
