@@ -14,7 +14,7 @@
         $tot=$res->rowCount();
         if($tot > 0){
             $login_user=$res->fetch();
-            $_SESSION['aid']=$login_user->id;
+            $_SESSION['uid']=$login_user->id;
             $_SESSION['uname']=$login_user->username;
             echo 200;
            

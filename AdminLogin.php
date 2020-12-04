@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['aid'])){  
+if(isset($_SESSION['uid'])){  
   header("Location:./AdminHome.php"); 
   exit();
 } 

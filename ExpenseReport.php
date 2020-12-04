@@ -23,37 +23,16 @@ if(!isset($_SESSION['uid'])){
         ?>
         <div class="container-fluid adminHome">
             <div class="row">
-                <div class="col-md-4 col-sm-12 ">
-                    <div class="adminHome__FormContainer">
-                    <h6 class="text-center text-danger" id="log_error"></h6>
-                    <h6 class="text-center text-success" id="log_success"></h6>
-                         <h5 class="text-primary text-center">Add User Details</h5>
-                         <form id="frm">
-                            <div class="form-group">
-                                <label class="text-light">UserName</label>
-                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter your email id"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="text-light">Email Id</label>
-                                <input type="text" name="email" id="email" class="form-control" placeholder="Enter your email id"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="text-light">Password</label>
-                                <input type="password" name="pass" id="pass" class="form-control" placeholder="Enter your password"/>
-                            </div>
-                            <input type="submit" class="btn btn-dark btn-block mt-4" value="Add user"/>
-                           
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-12 ">
+                
+               
+                <div class="col-md-12 col-sm-12 ">
                     <div class="user-table table-responsive">
-                        <h4 class="text-dark text-center">Employee leave Details</h4>
+                        <h4 class="text-dark text-center">Expenses Report Details</h4>
                         <script>
                             $(document).ready(function(){
                                
                                     $.ajax({
-                                        url:"./server/AdminViewUserDetails.php",
+                                        url:"./server/ViewExpense.php",
                                         type:"GET",
                                         dataType: "html",               
                                         success:function(d){

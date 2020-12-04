@@ -55,6 +55,9 @@ if(isset($_SESSION['aid'])){
                   if(d==200){
                     $("#log_error").text("");     
                      window.location.replace("./UserHome.php");
+                  }else if(d==403){
+                    $("#log_error").text("Your account is currently deactivated");
+                    document.querySelector("#frm").reset();
                   }else{
                   $("#log_error").text("!!Invalid email_id or password");
                     document.querySelector("#frm").reset();

@@ -14,9 +14,14 @@
         $tot=$res->rowCount();
         if($tot > 0){
             $login_user=$res->fetch();
-            $_SESSION['aid']=$login_user->id;
-            $_SESSION['uname']=$login_user->username;
-            echo 200;
+            if($login_user->isActive==1){
+                $_SESSION['aid']=$login_user->id;
+                $_SESSION['uname']=$login_user->username;
+                echo 200;
+            }else{
+                echo 403;
+            }
+           
            
         }else{
            echo 400;
