@@ -150,11 +150,9 @@ if(!isset($_SESSION['aid'])){
                                 <div class="card text-white bg-dark mb-3" style="min-width: 25rem;">
                                     <div class="card-header text-center text-center">Other Expenses</div>
                                         <div class="card-body text-center">
-                                            <button class="btn btn-danger">Add other Expenses</button>
+                                        <a href="./Other.php"><button class="btn btn-danger">Add other Expenses</button></a>
                                         </div>
-                                    </div>
-                                
-                         
+                                    </div>                      
 
                        </div>
                         
