@@ -141,7 +141,7 @@ if(!isset($_SESSION['aid'])){
                                     <div class="card text-white bg-dark mb-3" style="min-width: 25rem;">
                                         <div class="card-header text-center">Machinery Rents</div>
                                             <div class="card-body text-center">
-                                                <button class="btn btn-danger">Add Machinery Rents</button>
+                                            <a href="./MachineryRent.php"><button class="btn btn-danger">Add Machinery Rents</button></a>
                                             </div>
                                         </div>
                                     

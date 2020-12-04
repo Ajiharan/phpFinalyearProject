@@ -9,16 +9,17 @@
 
     try{     
         $pid=$_POST['pid'];
-        $lid=$_POST['lid'];
-        $nofw=$_POST['nofw'];
+        $mid=$_POST['mid'];
+        $nofh=$_POST['nofh'];
         $payment=$_POST['payment'];
         $pdate=$_POST['pdate'];
-       $tot=$nofw*$payment;
-         $expenseType="Labour Charges";
+        $tot=$nofh*$payment;
+       
+         $expenseType="Machinery Rent";
 
-            $sql="insert into labourpayment(projectId,labourId,noOfWorkers,payment,paidOn) values(?,?,?,?,?)";
+            $sql="insert into machineryrents(projectId,machineryId,hourlyPayment,noOfHrs,payment) values(?,?,?,?,?)";
             $res=$con->prepare($sql);
-            $res->execute([$pid,$lid,$nofw,$payment,$pdate]);   
+            $res->execute([$pid,$mid,$payment,$nofh,$tot]);   
             
            
             $sql="insert into expenses(projectId,expenseType,amount,cdate) values(?,?,?,?)";
