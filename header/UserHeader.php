@@ -25,6 +25,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="../../phpFinalYearProject/UserHome.php">Home <span class="sr-only">(current)</span></a>
       </li>
+      <?php if(isset($_SESSION['uname'])) { ?>
       <li class="nav-item">
         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Views & Entries</a>
         <div class="dropdown-menu drp" aria-labelledby="dropdownMenuButton">
@@ -39,9 +40,9 @@
           <a class="dropdown-item" href="../../phpFinalYearProject/LabourPayment.php">Labour payment</a>
           <a class="dropdown-item" href="../../phpFinalYearProject/MachineryRent.php">Machinery Rents</a>
           <a class="dropdown-item" href="../../phpFinalYearProject/Other.php">Other Expenses</a>
-      </div>
+       </div>
       </li>
-     
+      <?php } ?>
     </ul>
     <ul class="navbar-nav">
  

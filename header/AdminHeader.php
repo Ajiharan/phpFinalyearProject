@@ -27,10 +27,11 @@
       <li class="nav-item active">
         <a class="nav-link" href="../../phpFinalYearProject/AdminHome.php">Home <span class="sr-only">(current)</span></a>
       </li>
+      <?php if(isset($_SESSION['uid'])){ ?>
       <li class="nav-item">
         <a class="nav-link" href="../../phpFinalYearProject/ExpenseReport.php">Expense Report</a>
       </li>
-     
+      <?php } ?>
     </ul>
     <ul class="navbar-nav">
  
@@ -41,7 +42,7 @@
     } ?>
     </a></li>
       <li class="nav-item">
-        <?php if(isset($_SESSION['uname'])){ ?><a class="nav-link" href="../phpFinalYearProject/server/logout.php" tabindex="-1">Logout</a>  <?php }else{?> <a class="nav-link" href="./AdminLogin.php" tabindex="-1">SignIn</a><?php }?>
+        <?php if(isset($_SESSION['uname'])){ ?><a class="nav-link" href="../phpFinalYearProject/server/logout.php" tabindex="-1">Logout</a>  <?php }else{?> <a class="nav-link" href="./AdminLogin.php" tabindex="-1">Admin SignIn</a><?php }?>
       </li>    
     <ul>
   </div>
