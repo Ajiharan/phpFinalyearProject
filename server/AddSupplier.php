@@ -12,10 +12,11 @@
         $pno=$_POST['pno'];  
         $address=$_POST['address'];
         $vno=$_POST['vno'];
+        $uname=$_SESSION['uname'];
 
-            $sql="insert into suppliers(name,address,phone,vehicleNo) values(?,?,?,?)";
+            $sql="insert into suppliers(name,address,phone,vehicleNo,createdBy) values(?,?,?,?,?)";
             $res=$con->prepare($sql);
-            $res->execute([$name,$address,$pno,$vno]);        
+            $res->execute([$name,$address,$pno,$vno,$uname]);        
             echo 200;          
            
     }catch(PDOException $e){

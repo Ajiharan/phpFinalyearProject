@@ -1,7 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['aid'])){
-    
+if(!isset($_SESSION['aid']) && !isset($_SESSION['uid'])){
     header("Location:./UserLogin.php"); 
     exit();
 } 
@@ -23,7 +22,12 @@ if(!isset($_SESSION['aid'])){
 
     <div class="container-fluid userSupplier">
             <div class="row">
-                <div class="col-md-4 col-sm-12 ">
+            <?php  if(isset($_SESSION['uid'])){?>
+                <div class="col-md-4 col-sm-12 col-xs-12"></div>
+                <div class="col-md-4 col-sm-12 col-xs-12 ">
+            <?php }else { ?>
+                <div class="col-md-3 col-sm-12 col-xs-12 ">
+            <?php } ?>
                     <div class="userSupplier__FormContainer">
                     <h6 class="text-center text-danger" id="log_error"></h6>
                     <h6 class="text-center text-success" id="log_success"></h6>
@@ -66,8 +70,7 @@ if(!isset($_SESSION['aid'])){
                         $('.hideBtn').hide();
                     }
                      function getSuppliersData(){
-                            $(document).ready(function(){
-                               
+                            $(document).ready(function(){                        
                                $.ajax({
                                    url:"./server/viewSupplierTable.php",
                                    type:"GET",
@@ -80,7 +83,8 @@ if(!isset($_SESSION['aid'])){
                        });
                       }
                 </script>
-                <div class="col-md-8 col-sm-12 ">
+                <?php  if(isset($_SESSION['aid'])){?>
+                <div class="col-md-9 col-sm-12 ">
                     <div class="user-table table-responsive">
                         <h4 class="text-dark text-center">Supplier  Details</h4>
                         <script>
@@ -88,6 +92,10 @@ if(!isset($_SESSION['aid'])){
                         </script>
                     </div>
                 </div>
+                <?php } ?>
+                <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>         
+                <?php } ?>
             </div>
         </div>
 <script src="js/jquery.js"></script>

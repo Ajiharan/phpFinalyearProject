@@ -42,7 +42,7 @@
     } ?>
     </a></li>
       <li class="nav-item">
-        <?php if(isset($_SESSION['uname'])){ ?><a class="nav-link" href="../phpFinalYearProject/server/logout.php" tabindex="-1">Logout</a>  <?php }else{?> <a class="nav-link" href="./AdminLogin.php" tabindex="-1">Admin SignIn</a><?php }?>
+        <?php if(isset($_SESSION['uname'])){ ?><a class="nav-link" href="../phpFinalYearProject/server/logout.php" tabindex="-1">Logout</a>  <?php }else{?> <a class="nav-link" href="./AdminLogin.php" tabindex="-1"> Signin</a><?php }?>
       </li>    
     <ul>
   </div>

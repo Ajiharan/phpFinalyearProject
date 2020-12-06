@@ -11,10 +11,11 @@
         $address=$_POST['address'];
         $vno=$_POST['vno'];
         $id=$_POST['id'];
+        $uname=$_SESSION['uname'];
 
-        $sql="update  suppliers set name=?, address=?, phone=?, vehicleNo=? where id=?";
+        $sql="update  suppliers set name=?, address=?, phone=?, vehicleNo=?, updatedBy=? where id=?";
         $res=$con->prepare($sql);
-        $res->execute([$name,$address,$pno,$vno,$id]);
+        $res->execute([$name,$address,$pno,$vno,$uname,$id]);
         $tot=$res->rowCount();
         if($tot >0){
             echo "Updated";
