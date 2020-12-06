@@ -4,7 +4,8 @@
     $pass="";
     $db="cms";
     $con="";
-    $str="mysql:host=".$host.";dbname=".$db;
+    $port="3306";
+    $str="mysql:host=".$host.";port=".$port.";dbname=".$db;
 
     try{
         $con=new PDO($str,$user,$pass);

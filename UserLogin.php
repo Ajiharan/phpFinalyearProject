@@ -2,7 +2,10 @@
 session_start();
 if(isset($_SESSION['aid'])){
     
-    header("Location:./UserHome.php"); 
+    header("Location:./AdminHome.php"); 
+    exit();
+}elseif(isset($_SESSION['uid'])){
+  header("Location:./index.php"); 
     exit();
 } 
   
@@ -22,7 +25,7 @@ if(isset($_SESSION['aid'])){
   ?>   
   <div class="login__container">
     <div class="login__form">
-      <h5 class="text-center text-info">User Sign-in Form</h5>
+      <h5 class="text-center text-info"> Signin form</h5>
       <h6 class="text-center text-danger" id="log_error"></h6>
       <form id="frm">
         <div class="form-group">
@@ -34,7 +37,7 @@ if(isset($_SESSION['aid'])){
           <input type="password" name="pass" id="pass" class="form-control" placeholder="Enter your password"/>
         </div>
         <input type="submit" class="btn btn-dark btn-block mt-4" value="Signin"/>
-        <p class="text-light text-center mt-2"><a class="link-page" href="./adminLogin.php">Login as Admin</a> </p>
+       
         <p> <a class="link-page" href="#">Conditions of Use and Privacy Notice</a></p> 
       </form>
     </div>
@@ -52,9 +55,12 @@ if(isset($_SESSION['aid'])){
                 data:$("#frm").serialize(),
                 success:function(d){
                   document.querySelector("#frm").reset();
-                  if(d==200){
+                  if(d==201){
                     $("#log_error").text("");     
-                     window.location.replace("./UserHome.php");
+                     window.location.replace("./AdminHome.php");
+                  }else if(d==200){
+                    $("#log_error").text("");     
+                     window.location.replace("./index.php");
                   }else if(d==403){
                     $("#log_error").text("Your account is currently deactivated");
                     document.querySelector("#frm").reset();
