@@ -19,7 +19,7 @@ if(!isset($_SESSION['aid'])){
    
     <body>
         <?php 
-            include('./header/AdminHeader.php')
+            include('./header/UserHeader.php')
         ?>
         <div class="container-fluid adminHome">
             <div class="row">

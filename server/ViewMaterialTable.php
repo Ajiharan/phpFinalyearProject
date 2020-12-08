@@ -10,6 +10,10 @@
     <thead class='thead-dark'>
         <tr>    
             <th scope='col'>Name</th>
+            <th scope='col'>CreatedDate</th>
+            <th scope='col'>ModifiedDate</th>
+            <th scope='col'>CreatedBy</th>
+            <th scope='col'>ModifiedBy</th>
             <th scope='col'>Edit</th>
             <th scope='col'>Delete</th>
         </tr>
@@ -25,7 +29,11 @@
         $supplier=$res->fetchAll();
        foreach( $supplier as $row){
         $result.= "<tr>
-            <td>".$row->name."</td>";
+            <td>".$row->name."</td>
+            <td>".$row->createdAt."</td>
+            <td>".$row->modifiedAt."</td>
+            <td>".$row->createdBy."</td>
+            <td>".$row->updatedBy."</td>";
     
              $result.="<td><button class='btn btn-warning ".$row->id."' ' onclick='editmaterialDetails($row->id)'
                >Edit</button></td>";        

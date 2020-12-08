@@ -13,9 +13,10 @@
         $pval=$_POST['pval'];
         $dur=$_POST['dur'];
         $fee=$_POST['fee'];
-        $sql="update  tenders set clientId=?, project=?, projectValue=?, duration=?, security_fee=? where id=?";
+        $uname=$_SESSION['uname'];
+        $sql="update  tenders set clientId=?, project=?, projectValue=?, duration=?, security_fee=? ,updatedBy=? where id=?";
         $res=$con->prepare($sql);
-        $res->execute([ $cid,$project,$pval,$dur,$fee,$id]);
+        $res->execute([ $cid,$project,$pval,$dur,$fee,$uname,$id]);
         $tot=$res->rowCount();
 
         if($tot >0){

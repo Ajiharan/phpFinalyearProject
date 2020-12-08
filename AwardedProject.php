@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['aid'])){ 
+if(!isset($_SESSION['aid']) && !isset($_SESSION['uid'])){
     header("Location:./UserLogin.php"); 
     exit();
 } 
@@ -22,7 +22,12 @@ if(!isset($_SESSION['aid'])){
 
     <div class="container-fluid userSupplier">
             <div class="row">
-                <div class="col-md-4 col-sm-12 ">
+            <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php }else { ?>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php } ?>
                     <div class="userSupplier__FormContainer">
                     <h6 class="text-center text-danger" id="log_error"></h6>
                     <h6 class="text-center text-success" id="log_success"></h6>
@@ -63,7 +68,7 @@ if(!isset($_SESSION['aid'])){
                                 <label class="text-light">estimated value</label>
                                 <input type="text" name="eval" id="eval" class="form-control" placeholder="Enter Estimated value"/>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <label class="text-light">Project start date</label>
                                 <input type="date" name="sdate" id="sdate" class="form-control" placeholder="Enter  start date"/>
                             </div>
@@ -113,14 +118,19 @@ if(!isset($_SESSION['aid'])){
                        });
                       }
                 </script>
-                <div class="col-md-8 col-sm-12 ">
-                    <div class="user-table table-responsive">
-                        <h4 class="text-dark text-center">Supplier  Details</h4>
-                        <script>
-                            getAwardedprojectData();
-                        </script>
+                 <?php  if(isset($_SESSION['aid'])){?>
+                    <div class="col-md-8 col-sm-12 ">
+                        <div class="user-table table-responsive">
+                            <h4 class="text-dark text-center">Awarded project  details</h4>
+                            <script>
+                                getAwardedprojectData();
+                            </script>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
+                <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>         
+                <?php } ?>
             </div>
         </div>
 <script src="js/jquery.js"></script>
@@ -158,54 +168,66 @@ if(!isset($_SESSION['aid'])){
 <script>
     $(document).ready(function(){
         $('.hideBtn').hide();
+        edate.min = new Date().toISOString().split("T")[0];
+        sdate.min = new Date().toISOString().split("T")[0];
+        rdate.min = new Date().toISOString().split("T")[0];
      
       $.validator.setDefaults({
 	      	submitHandler: function() {
-                  $id=$('#id').val();
-                  if($id=="0"){
-                    $.ajax({
-                        url:"./server/AddAwardedProject.php",
-                        type:"post",
-                        data:$("#frm").serialize(),
-                        success:function(d){
-                        document.querySelector("#frm").reset();
-                        if(d==200){
-                            getAwardedprojectData();
-                            $("#log_error").text("");
-                            $("#log_success").text("Sucessfullly Added");   
-                            
+
+                  var startDate=$('#sdate').val();
+                  var endDate=$('#edate').val();
+
+                  if(Date.parse(endDate) > Date.parse(startDate)){
+                    $id=$('#id').val();
+                        if($id=="0"){
+                            $.ajax({
+                                url:"./server/AddAwardedProject.php",
+                                type:"post",
+                                data:$("#frm").serialize(),
+                                success:function(d){
+                                document.querySelector("#frm").reset();
+                                if(d==200){
+                                    getAwardedprojectData();
+                                    $("#log_error").text("");
+                                    $("#log_success").text("Sucessfullly Added");   
+                                    
+                                }else{
+                                    $("#log_error").text(d);
+                                    $("#log_success").text("");   
+                                    
+                                }
+                                
+                                }
+                            });
                         }else{
-                            $("#log_error").text(d);
-                            $("#log_success").text("");   
-                            
+                            $.ajax({
+                                url:"./server/UpdateAwardedProject.php",
+                                type:"POST",
+                                data:$("#frm").serialize(),            
+                                success:function(d){
+                                    getAwardedprojectData();
+                                    clearField();
+                                    swal({
+                                        title: d,
+                                        text: "updated",
+                                        icon: "success",
+                                        button: "ok",
+                                    });
+                                                    
+                                }
+                            });
+
+
                         }
-                        
-                        }
-                    });
                     }else{
-                        $.ajax({
-                            url:"./server/UpdateAwardedProject.php",
-                            type:"POST",
-                            data:$("#frm").serialize(),            
-                            success:function(d){
-                                getAwardedprojectData();
-                                clearField();
-                                swal({
-                                    title: d,
-                                    text: "updated",
-                                    icon: "success",
-                                    button: "ok",
-                                });
-                                                
-                            }
-                        });
-
-
+                        alert("End Date must be grater than currentDate")
                     }
+                 
           
             
-            }
-      });
+                }
+        });
       $("#frm").validate({
         rules:{ 
           tid:{
@@ -213,7 +235,7 @@ if(!isset($_SESSION['aid'])){
           },
           eval:{
             required:true,
-            number:true
+            digits:true
           },
           sdate:{
               required:true       
@@ -222,7 +244,7 @@ if(!isset($_SESSION['aid'])){
               required:true
           },ramount:{
               required:true,
-              number:true
+              digits:true
           },rdate:{
               required:true
           }
@@ -243,7 +265,8 @@ if(!isset($_SESSION['aid'])){
           edate:{
               required:"date is  required."
           },ramount:{
-                required:"retention amount is  required."
+                required:"retention amount is  required.",
+                digits:"Invalid Type"
           },rdate:{
             required:"date is  required." 
           }
@@ -256,23 +279,41 @@ if(!isset($_SESSION['aid'])){
 
             var row=$('.'+id);
             $("#id").val(id);
-            var tid=row.closest("tr").find("td:eq(0)").text();
+            var tname=row.closest("tr").find("td:eq(0)").text();
             var eval=row.closest("tr").find("td:eq(1)").text();
             var psdate=row.closest("tr").find("td:eq(2)").text();
             var pedate=row.closest("tr").find("td:eq(3)").text();
             var ramount=row.closest("tr").find("td:eq(4)").text();
             var rdueDate=row.closest("tr").find("td:eq(5)").text();
-            $('.hideBtn').show();
-           $("#tid").val(tid);
-           $("#eval").val(eval);
-           $("#sdate").val(psdate);
-           $('#edate').val(pedate);
-           $('#ramount').val(ramount);
-           $('#rdate').val(rdueDate);
 
-           $('.addBtn').val('Update')
-           $(".addBtn").removeClass("btn-dark");
-           $(".addBtn").addClass("btn-success")
+
+        
+            $.ajax({
+                url:"./server/getProjectName.php",
+                type:"POST",
+                data:{tname:tname},                    
+                 success:function(d){  
+                     console.log(d)             
+                   
+                    $('.hideBtn').show();
+                    $("#tid").val(parseInt(d));
+                    $("#eval").val(eval);
+                    $("#sdate").val(psdate);
+                    $('#edate').val(pedate);
+                    $('#ramount').val(ramount);
+                    $('#rdate').val(rdueDate);
+
+                    $('.addBtn').val('Update')
+                    $(".addBtn").removeClass("btn-dark");
+                    $(".addBtn").addClass("btn-success")             
+                }
+            });
+          
+          
+           
+
+
+
 
       }
   </script>

@@ -12,10 +12,11 @@
         $pno=$_POST['pno'];  
         $address=$_POST['address'];
         $workType=$_POST['workType'];
+        $uname=$_SESSION['uname'];
 
-            $sql="insert into labours(name,address,phone,workType) values(?,?,?,?)";
+            $sql="insert into labours(name,address,phone,workType,createdBy) values(?,?,?,?,?)";
             $res=$con->prepare($sql);
-            $res->execute([$name,$address,$pno,$workType]);        
+            $res->execute([$name,$address,$pno,$workType,$uname]);        
             echo 200;          
            
     }catch(PDOException $e){

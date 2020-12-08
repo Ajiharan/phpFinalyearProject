@@ -1,7 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['aid'])){
-    
+if(!isset($_SESSION['aid']) && !isset($_SESSION['uid'])){
     header("Location:./UserLogin.php"); 
     exit();
 } 
@@ -23,7 +22,12 @@ if(!isset($_SESSION['aid'])){
 
     <div class="container-fluid userSupplier">
             <div class="row">
-                <div class="col-md-4 col-sm-12 ">
+            <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php }else { ?>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php } ?>
                     <div class="userSupplier__FormContainer">
                     <h6 class="text-center text-danger" id="log_error"></h6>
                     <h6 class="text-center text-success" id="log_success"></h6>
@@ -112,8 +116,9 @@ if(!isset($_SESSION['aid'])){
                            
                            
                             <input type="hidden" id="id" name="id" value="0"/>
+                            <input type="hidden" id="ndate" name="ndate" />
                             <div class="mybutton">
-                                <input type="submit" class="btn btn-dark btn-block m-4 addBtn" value="Add Labour"/>
+                                <input type="submit" class="btn btn-dark btn-block m-4 addBtn" value="Add labour payment"/>
                                 <input type="button" onclick='clearField()' class="btn btn-danger btn-block m-4 hideBtn" value="Cancel"/>
                             </div>
                         </form>
@@ -125,7 +130,7 @@ if(!isset($_SESSION['aid'])){
                        $('#frm')[0].reset();
                        $('#id').val("0")
                         $(".addBtn").addClass("btn-dark");
-                        $(".addBtn").val("Add Labours");
+                        $(".addBtn").val("Add labour payment");
                         $(".addBtn").removeClass("btn-success");
                         $('.hideBtn').hide();
                     }
@@ -144,14 +149,19 @@ if(!isset($_SESSION['aid'])){
                        });
                       }
                 </script>
-                <div class="col-md-8 col-sm-12 ">
-                    <div class="user-table table-responsive">
-                        <h4 class="text-dark text-center">Supplier  Details</h4>
-                        <script>
-                            getLaboursData();
-                        </script>
-                    </div>
-                </div>
+                  <?php  if(isset($_SESSION['aid'])){?>
+                    <div class="col-md-8 col-sm-12 ">
+                        <div class="user-table table-responsive">
+                            <h4 class="text-dark text-center">Supplier  Details</h4>
+                            <script>
+                                getLaboursData();
+                            </script>
+                        </div>
+                     </div>
+                 <?php } ?>
+                 <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>         
+                <?php } ?>
             </div>
         </div>
 <script src="js/jquery.js"></script>
@@ -171,7 +181,7 @@ if(!isset($_SESSION['aid'])){
                         $.ajax({
                             url:"./server/DeleteLabourPayment.php",
                             type:"POST",
-                            data:{id:id},            
+                            data:{id:id,tid:$('#ndate').val()},            
                             success:function(d){
                                 getLaboursData();
                                 swal("Poof! Your imaginary file has been deleted!", {icon: "success",});                       
@@ -189,11 +199,12 @@ if(!isset($_SESSION['aid'])){
 <script>
     $(document).ready(function(){
         $('.hideBtn').hide();
-     
+        $('#ndate').val(Date.now());
       $.validator.setDefaults({
 	      	submitHandler: function() {
                   $id=$('#id').val();
                   if($id=="0"){
+                    $('#ndate').val(Date.now());
                     $.ajax({
                         url:"./server/AddlabourPayment.php",
                         type:"post",
@@ -287,16 +298,42 @@ if(!isset($_SESSION['aid'])){
             var nofw=row.closest("tr").find("td:eq(2)").text();
             var payment=row.closest("tr").find("td:eq(3)").text();
             var pdate=row.closest("tr").find("td:eq(4)").text();
-            
-            $('.hideBtn').show();
-           $("#pid").val(pid);
-           $("#lid").val(lid);
-           $("#nofw").val(nofw);
-           $('#payment').val(payment);
-           $('#pdate').val(pdate);
-           $('.addBtn').val('Update')
-           $(".addBtn").removeClass("btn-dark");
-           $(".addBtn").addClass("btn-success")
+            var tid=row.closest("tr").find("td:eq(9)").text();
+        
+
+           $.ajax({
+                url:"./server/getMaterialPurchasePid.php",
+                type:"POST",
+                data:{pname:pid},                    
+                 success:function(d){
+                     console.log(d);
+                    $("#pid").val(parseInt(d));
+
+                    $.ajax({
+                    url:"./server/getlabourName.php",
+                    type:"POST",
+                    data:{lname:lid},                    
+                    success:function(d1){               
+                    
+                        $('.hideBtn').show();
+                        $("#ndate").val(tid);
+                        $("#lid").val(parseInt(d1));
+                        $("#nofw").val(nofw);
+                        $('#payment').val(payment);
+                        $('#pdate').val(pdate);
+                        $('.addBtn').val('Update')
+                        $(".addBtn").removeClass("btn-dark");
+                        $(".addBtn").addClass("btn-success")
+                                    
+                
+                    }
+                });
+                   
+                             
+                   
+                }
+            });
+          
 
       }
 

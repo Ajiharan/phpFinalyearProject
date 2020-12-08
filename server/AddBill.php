@@ -12,6 +12,7 @@
         $billNo=$_POST['billNo'];  
         $amountReceived=$_POST['amountReceived'];
         $receivedDate=$_POST['receivedDate'];
+        $uname=$_SESSION['uname'];
 
         $sql1="select * from bills where billNo=?";
         $res1=$con->prepare($sql1);
@@ -21,9 +22,9 @@
         if($tot1 > 0){
             echo "sorry bill No already exists";
         }else{
-            $sql="insert into bills(projectId,billNo,receivedAmount,receivedDate) values(?,?,?,?)";
+            $sql="insert into bills(projectId,billNo,receivedAmount,receivedDate,createdBy) values(?,?,?,?,?)";
             $res=$con->prepare($sql);
-            $res->execute([$pid,$billNo,$amountReceived,$receivedDate]);        
+            $res->execute([$pid,$billNo,$amountReceived,$receivedDate,$uname]);        
             echo 200;     
         }
             

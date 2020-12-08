@@ -1,7 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['aid'])){
-    
+if(!isset($_SESSION['aid']) && !isset($_SESSION['uid'])){
     header("Location:./UserLogin.php"); 
     exit();
 } 
@@ -23,7 +22,12 @@ if(!isset($_SESSION['aid'])){
 
     <div class="container-fluid userSupplier">
             <div class="row">
-                <div class="col-md-4 col-sm-12 ">
+            <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php }else { ?>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php } ?>
                     <div class="userSupplier__FormContainer">
                     <h6 class="text-center text-danger" id="log_error"></h6>
                     <h6 class="text-center text-success" id="log_success"></h6>
@@ -81,6 +85,7 @@ if(!isset($_SESSION['aid'])){
                             </div>
                                              
                             <input type="hidden" id="id" name="id" value="0"/>
+                            <input type="hidden" id="ndate" name="ndate" />
                             <div class="mybutton">
                                 <input type="submit" class="btn btn-dark btn-block m-4 addBtn" value="Add Other expense"/>
                                 <input type="button" onclick='clearField()' class="btn btn-danger btn-block m-4 hideBtn" value="Cancel"/>
@@ -112,14 +117,19 @@ if(!isset($_SESSION['aid'])){
                        });
                       }
                 </script>
-                <div class="col-md-8 col-sm-12 ">
-                    <div class="user-table table-responsive">
-                        <h4 class="text-dark text-center">Material Purchase  Details</h4>
-                        <script>
-                            getmaterialData();
-                        </script>
+                <?php  if(isset($_SESSION['aid'])){?>
+                    <div class="col-md-8 col-sm-12 ">
+                        <div class="user-table table-responsive">
+                            <h4 class="text-dark text-center">Material Purchase  Details</h4>
+                            <script>
+                                getmaterialData();
+                            </script>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
+                <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>         
+                <?php } ?>
             </div>
         </div>
 <script src="js/jquery.js"></script>
@@ -139,7 +149,7 @@ if(!isset($_SESSION['aid'])){
                         $.ajax({
                             url:"./server/DeleteOther.php",
                             type:"POST",
-                            data:{id:id},            
+                            data:{id:id,tid:$('#ndate').val()},            
                             success:function(d){
                                 getmaterialData();
                                 swal("Poof! Your file  has been deleted!", {icon: "success",});                       
@@ -157,11 +167,13 @@ if(!isset($_SESSION['aid'])){
 <script>
     $(document).ready(function(){
         $('.hideBtn').hide();
-     
+        $('#ndate').val(Date.now());
+
       $.validator.setDefaults({
 	      	submitHandler: function() {
                   $id=$('#id').val();
                   if($id=="0"){
+                    $('#ndate').val(Date.now());
                     $.ajax({
                         url:"./server/AddOther.php",
                         type:"post",
@@ -211,7 +223,8 @@ if(!isset($_SESSION['aid'])){
           },
         
           price:{
-              required:true
+              required:true,
+              digits:true
           },
           desc:{
               required:true
@@ -227,7 +240,8 @@ if(!isset($_SESSION['aid'])){
           },
          
           price:{
-              required:"amount is required"
+              required:"amount is required",
+              digits:"Invalid type"
           },
           desc:{
               required:"description is required"
@@ -248,16 +262,29 @@ if(!isset($_SESSION['aid'])){
             var desc=row.closest("tr").find("td:eq(1)").text();
             var price=row.closest("tr").find("td:eq(2)").text();
             var cdate=row.closest("tr").find("td:eq(3)").text();
-           
-            $('.hideBtn').show();
-           $("#pid").val(pid);
-           $("#desc").val(desc);
-           $("#price").val(price);
-           $("#cdate").val(cdate);
-           
-           $('.addBtn').val('Update')
-           $(".addBtn").removeClass("btn-dark");
-           $(".addBtn").addClass("btn-success")
+            var tid=row.closest("tr").find("td:eq(8)").text();
+                  
+
+           $.ajax({
+                url:"./server/getMaterialPurchasePid.php",
+                type:"POST",
+                data:{pname:pid},                    
+                 success:function(d){
+                    console.log(d);
+                    $("#pid").val(parseInt(d));
+
+                    $('.hideBtn').show();
+                 
+                     $("#desc").val(desc);
+                     $("#price").val(price);
+                     $("#cdate").val(cdate);
+                     $("#ndate").val(tid);   
+                     $('.addBtn').val('Update')
+                     $(".addBtn").removeClass("btn-dark");
+                     $(".addBtn").addClass("btn-success");                           
+                   
+                }
+            });
 
       }
   </script>

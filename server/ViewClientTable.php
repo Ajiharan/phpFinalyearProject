@@ -13,6 +13,10 @@
             <th scope='col'>Address</th>
             <th scope='col'>Phone</th>
             <th scope='col'>Email id</th>
+            <th scope='col'>CreatedDate</th>
+            <th scope='col'>ModifiedDate</th>
+            <th scope='col'>CreatedBy</th>
+            <th scope='col'>ModifiedBy</th>
             <th scope='col'>Edit</th>
             <th scope='col'>Delete</th>
         </tr>
@@ -26,12 +30,17 @@
     $tot=$res->rowCount();
     if($tot > 0){
         $supplier=$res->fetchAll();
-       foreach( $supplier as $row){
+       foreach( $supplier as $row){     
         $result.= "<tr>
             <td>".$row->name."</td>
             <td>".$row->address."</td>
             <td>".$row->phone."</td>
-            <td>".$row->email."</td>";
+            <td>".$row->email."</td>
+            <td>".$row->createdAt."</td>
+            <td>".$row->modifiedAt."</td>
+            <td>".$row->createdBy."</td>
+            <td>".$row->updatedBy."</td>
+            ";
     
              $result.="<td><button class='btn btn-warning ".$row->id."' ' onclick='editSupplierDetails($row->id)'
                >Edit</button></td>";        

@@ -9,7 +9,7 @@
 
     try{     
         $name=$_POST['mname'];
-     
+        $uname=$_SESSION['uname'];
 
         $sql1="select * from materials where name=?";
         $res1=$con->prepare($sql1);
@@ -19,9 +19,9 @@
         if($tot1 > 0){
             echo "sorry material name already exists";
         }else{
-            $sql="insert into materials(name) values(?)";
+            $sql="insert into materials(name,createdBy) values(?,?)";
             $res=$con->prepare($sql);
-            $res->execute([$name]);        
+            $res->execute([$name,$uname]);        
             echo 200;     
         }
             

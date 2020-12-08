@@ -14,6 +14,7 @@
         $edate=$_POST['edate'];
         $ramount=$_POST['ramount'];
         $rdate=$_POST['rdate'];
+        $uname=$_SESSION['uname'];
 
         $sql1="select * from awardedprojects where tenderId=?";
         $res1=$con->prepare($sql1);
@@ -23,9 +24,9 @@
         if($tot1 > 0){
             echo "sorry tender id already  exists";
         }else{
-            $sql="insert into awardedprojects(tenderId,estimatedValue,projectStartDate,projectEndDate,retentionAmount,retentionDueDate) values(?,?,?,?,?,?)";
+            $sql="insert into awardedprojects(tenderId,estimatedValue,projectStartDate,projectEndDate,retentionAmount,retentionDueDate,createdBy) values(?,?,?,?,?,?,?)";
             $res=$con->prepare($sql);
-            $res->execute([$tid,$eval,$sdate,$edate,$ramount,$rdate]); 
+            $res->execute([$tid,$eval,$sdate,$edate,$ramount,$rdate,$uname]); 
             
             $sql3="update tenders set isAwarded=? where id=?";
             $res3=$con->prepare($sql3);

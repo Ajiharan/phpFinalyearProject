@@ -1,7 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['aid'])){
-    
+if(!isset($_SESSION['aid']) && !isset($_SESSION['uid'])){
     header("Location:./UserLogin.php"); 
     exit();
 } 
@@ -23,11 +22,16 @@ if(!isset($_SESSION['aid'])){
 
     <div class="container-fluid userSupplier">
             <div class="row">
-                <div class="col-md-4 col-sm-12 ">
+            <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php }else { ?>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php } ?>
                     <div class="userSupplier__FormContainer">
                     <h6 class="text-center text-danger" id="log_error"></h6>
                     <h6 class="text-center text-success" id="log_success"></h6>
-                         <h5 class="text-primary text-center">Add Tenders Details</h5>
+                         <h5 class="text-primary text-center">Add tender details</h5>
                          <form id="frm">
                             <div class="form-group">
                                 <label class="text-light">Client Name</label>
@@ -83,7 +87,7 @@ if(!isset($_SESSION['aid'])){
                            
                             <input type="hidden" id="id" name="id" value="0"/>
                             <div class="mybutton">
-                                <input type="submit" class="btn btn-dark btn-block m-4 addBtn" value="Add Client"/>
+                                <input type="submit" class="btn btn-dark btn-block m-4 addBtn" value="Add tender"/>
                                 <input type="button" onclick='clearField()' class="btn btn-danger btn-block m-4 hideBtn" value="Cancel"/>
 
                             </div>
@@ -96,7 +100,7 @@ if(!isset($_SESSION['aid'])){
                        $('#frm')[0].reset();
                        $('#id').val("0")
                         $(".addBtn").addClass("btn-dark");
-                        $(".addBtn").val("Add Tenders");
+                        $(".addBtn").val("Add tender");
                         $(".addBtn").removeClass("btn-success");
                         $('.hideBtn').hide();
                     }
@@ -115,6 +119,7 @@ if(!isset($_SESSION['aid'])){
                        });
                       }
                 </script>
+                 <?php  if(isset($_SESSION['aid'])){?>
                 <div class="col-md-8 col-sm-12 ">
                     <div class="user-table table-responsive">
                         <h4 class="text-dark text-center">Tender  Details</h4>
@@ -123,6 +128,11 @@ if(!isset($_SESSION['aid'])){
                         </script>
                     </div>
                 </div>
+                <?php } ?>
+                
+			    <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>         
+                <?php } ?>
             </div>
         </div>
 <script src="js/jquery.js"></script>
@@ -218,14 +228,15 @@ if(!isset($_SESSION['aid'])){
           },
           pval:{
             required:true,
-            number:true
+            digits:true
           },
           dur:{
-              required:true       
+              required:true,
+              digits:true       
           },
           fee:{
               required:true,
-              number:true
+              digits:true
           }
          
         },
@@ -235,14 +246,15 @@ if(!isset($_SESSION['aid'])){
           },
           pval:{
             required:"Project value is required.",
-            number:"Invalid type"
+            digits:"Invalid type"
           },
           dur:{
-              required:"duration is required"
+              required:"duration is required",
+              digits:"Invalid type"
           },
           fee:{
               required:"Fees is required.",
-              number:"Invalid"
+              digits:"Invalid type"
           }
         }
       });
@@ -252,22 +264,35 @@ if(!isset($_SESSION['aid'])){
       function editTenderDetails(id){
             var row=$('.'+id);
             $("#id").val(id);
-            var cid=row.closest("tr").find("td:eq(0)").text();
+            var cname=row.closest("tr").find("td:eq(0)").text();
             var project=row.closest("tr").find("td:eq(1)").text();
             var projectValue=row.closest("tr").find("td:eq(2)").text();
             var duration=row.closest("tr").find("td:eq(3)").text();
             var securityFee=row.closest("tr").find("td:eq(4)").text();
-          
-            $('.hideBtn').show();
-           $("#uname").val(cid);
-           $("#project").val(project);
-           $("#pval").val(projectValue);
-           $('#dur').val(duration);
-           $('#fee').val(securityFee);
 
-           $('.addBtn').val('Update')
-           $(".addBtn").removeClass("btn-dark");
-           $(".addBtn").addClass("btn-success")
+            
+
+            $.ajax({
+                url:"./server/getClientName.php",
+                type:"POST",
+                data:{cname:cname},                    
+                 success:function(d){               
+                    $("#uname").val(parseInt(d));  
+                    $('.hideBtn').show();
+         
+                    $("#project").val(project);
+                    $("#pval").val(projectValue);
+                    $('#dur').val(duration);
+                    $('#fee').val(securityFee);
+
+                    $('.addBtn').val('Update')
+                    $(".addBtn").removeClass("btn-dark");
+                    $(".addBtn").addClass("btn-success")                
+                }
+            });
+          
+          
+           
 
       }
   </script>

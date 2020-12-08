@@ -11,10 +11,11 @@
         $billNo=$_POST['billNo'];  
         $amountReceived=$_POST['amountReceived'];
         $receivedDate=$_POST['receivedDate'];
+        $uname=$_SESSION['uname'];
 
-        $sql="update  bills set projectId =?,  billNo=?, receivedAmount=?, receivedDate=? where id=?";
+        $sql="update  bills set projectId =?,  billNo=?, receivedAmount=?, receivedDate=?,updatedBy=? where id=?";
         $res=$con->prepare($sql);
-        $res->execute([$pid,$billNo,$amountReceived,$receivedDate,$id]);
+        $res->execute([$pid,$billNo,$amountReceived,$receivedDate,$uname,$id]);
         $tot=$res->rowCount();
         if($tot >0){
             echo "Updated";

@@ -13,14 +13,25 @@
         $nofh=$_POST['nofh'];
         $payment=$_POST['payment'];
         $pdate=$_POST['pdate'];
-        $tot=$nofh*$payment;
+        $total=$nofh*$payment;
+        $uname=$_SESSION['uname'];
+        $ndate=$_POST['ndate'];
         
-        $sql="update  machineryrents set projectId=?,machineryId=?,hourlyPayment=?,noOfHrs=?,payment=? where id=?";
+        $sql="update  machineryrents set projectId=?,machineryId=?,hourlyPayment=?,noOfHrs=?,payment=?,updatedBy=?,ndate=? where id=?";
         $res=$con->prepare($sql);
-        $res->execute([$pid,$mid,$payment,$nofh,$tot,$id]);
+        $res->execute([$pid,$mid,$payment,$nofh,$total,$uname,$ndate,$id]);
         $tot=$res->rowCount();
         if($tot >0){
-            echo "Updated";
+           
+            $sql1="update  expenses set projectId=?,amount=?,updatedBy=? where tid=?";
+            $res1=$con->prepare($sql1);
+            $res1->execute([$pid,$total,$uname,$ndate]);
+            $tot1=$res1->rowCount();
+            if($tot1 >0){
+                echo "Updated";
+            }else{
+                echo "No Changes detected";
+            }
         }else{
             echo "No Changes detected";
         }

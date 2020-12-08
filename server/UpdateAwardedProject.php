@@ -13,10 +13,11 @@
         $edate=$_POST['edate'];
         $ramount=$_POST['ramount'];
         $rdate=$_POST['rdate'];
+        $uname=$_SESSION['uname'];
 
-        $sql="update  awardedprojects set tenderId=?, estimatedValue=?, projectStartDate=?, projectEndDate=?,retentionAmount=?,retentionDueDate=? where id=?";
+        $sql="update  awardedprojects set tenderId=?, estimatedValue=?, projectStartDate=?, projectEndDate=?,retentionAmount=?,retentionDueDate=?,createdBy=? where id=?";
         $res=$con->prepare($sql);
-        $res->execute([$tid,$eval,$sdate,$edate,$ramount,$rdate,$id]);
+        $res->execute([$tid,$eval,$sdate,$edate,$ramount,$rdate,$uname,$id]);
         $tot=$res->rowCount();
         if($tot >0){
             echo "Updated";

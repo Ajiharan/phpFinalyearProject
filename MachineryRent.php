@@ -1,7 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['aid'])){
-    
+if(!isset($_SESSION['aid']) && !isset($_SESSION['uid'])){
     header("Location:./UserLogin.php"); 
     exit();
 } 
@@ -23,7 +22,13 @@ if(!isset($_SESSION['aid'])){
 
     <div class="container-fluid userSupplier">
             <div class="row">
-                <div class="col-md-4 col-sm-12 ">
+               	
+			<?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php }else { ?>
+                    <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <?php } ?>
                     <div class="userSupplier__FormContainer">
                     <h6 class="text-center text-danger" id="log_error"></h6>
                     <h6 class="text-center text-success" id="log_success"></h6>
@@ -52,10 +57,7 @@ if(!isset($_SESSION['aid'])){
                                          
                                         }else{
                                            
-                                        }
-
-                                       
-                                    
+                                        }                           
 
                                     }catch(PDOException $e){
                                         echo "Error".$e->getMessage();
@@ -111,6 +113,7 @@ if(!isset($_SESSION['aid'])){
                             </div>
                            
                             <input type="hidden" id="id" name="id" value="0"/>
+                            <input type="hidden" id="ndate" name="ndate" />
                             <div class="mybutton">
                                 <input type="submit" class="btn btn-dark btn-block m-4 addBtn" value="Add Machinery rent"/>
                                 <input type="button" onclick='clearField()' class="btn btn-danger btn-block m-4 hideBtn" value="Cancel"/>
@@ -144,14 +147,20 @@ if(!isset($_SESSION['aid'])){
                        });
                       }
                 </script>
-                <div class="col-md-8 col-sm-12 ">
-                    <div class="user-table table-responsive">
-                        <h4 class="text-dark text-center">Supplier  Details</h4>
-                        <script>
-                            getmachineryData();
-                        </script>
+                 <?php  if(isset($_SESSION['aid'])){?>
+                    <div class="col-md-8 col-sm-12 ">
+                        <div class="user-table table-responsive">
+                            <h4 class="text-dark text-center">Supplier  Details</h4>
+                            <script>
+                                getmachineryData();
+                            </script>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
+                			   
+			    <?php  if(isset($_SESSION['uid'])){?>
+                    <div class="col-md-4 col-sm-12 col-xs-12"></div>         
+                <?php } ?>
             </div>
         </div>
 <script src="js/jquery.js"></script>
@@ -171,7 +180,7 @@ if(!isset($_SESSION['aid'])){
                         $.ajax({
                             url:"./server/DeleteMachineryRent.php",
                             type:"POST",
-                            data:{id:id},            
+                            data:{id:id,tid:$('#ndate').val()},            
                             success:function(d){
                                 getmachineryData();
                                 swal("Poof! Your data  has been deleted!", {icon: "success",});                       
@@ -189,11 +198,12 @@ if(!isset($_SESSION['aid'])){
 <script>
     $(document).ready(function(){
         $('.hideBtn').hide();
-     
+        $('#ndate').val(Date.now());
       $.validator.setDefaults({
 	      	submitHandler: function() {
                   $id=$('#id').val();
                   if($id=="0"){
+                    $('#ndate').val(Date.now());
                     $.ajax({
                         url:"./server/AddMachineryRents.php",
                         type:"post",
@@ -244,13 +254,15 @@ if(!isset($_SESSION['aid'])){
           },
           mid:{
             required:true,
-            digits:true
+          
           },
           nofh:{
-              required:true       
+              required:true,
+              digits:true       
           },
           payment:{
-              required:true
+              required:true,
+              digits:true
           },
           pdate:{
             required:true  
@@ -261,15 +273,17 @@ if(!isset($_SESSION['aid'])){
             pid:{
             required:"Field is required.",
           },
-          lid:{
+          mid:{
             required:"Field is required",
           
           },
-          nofw:{
-              required:"no of hours is required."
+          nofh:{
+              required:"no of hours is required.",
+              digits:"Invalid type"
           },
           payment:{
-              required:"Payment is required."
+              required:"Payment is required.",
+            digits:"Invalid type"
           },
           pdate:{
             required:"date is required."
@@ -287,18 +301,45 @@ if(!isset($_SESSION['aid'])){
             var nofh=row.closest("tr").find("td:eq(3)").text();
             var payment=row.closest("tr").find("td:eq(2)").text();
             var pdate=row.closest("tr").find("td:eq(4)").text();
-            
-            $('.hideBtn').show();
-            $('#pdate').hide();
-            $('.ldate').hide();
-           $("#pid").val(pid);
-           $("#mid").val(mid);
-           $("#nofh").val(nofh);
-           $('#payment').val(payment);
-           $('#pdate').val(pdate);
-           $('.addBtn').val('Update')
-           $(".addBtn").removeClass("btn-dark");
-           $(".addBtn").addClass("btn-success")
+            var tid=row.closest("tr").find("td:eq(9)").text();
+         
+
+           $.ajax({
+                url:"./server/getMaterialPurchasePid.php",
+                type:"POST",
+                data:{pname:pid},                    
+                 success:function(d){
+                     console.log(d);
+                    $("#pid").val(parseInt(d));
+
+                    $.ajax({
+                    url:"./server/getmachineries.php",
+                    type:"POST",
+                    data:{mname:mid},                    
+                    success:function(d1){               
+                    
+                        $('.hideBtn').show();
+                        $('#pdate').hide();
+                        $('.ldate').hide();
+                        $("#ndate").val(tid);
+                        $("#mid").val(parseInt(d1));
+                        $("#nofh").val(nofh);
+                        $('#payment').val(payment);
+                        $('#pdate').val(pdate);
+                        $('.addBtn').val('Update')
+                        $(".addBtn").removeClass("btn-dark");
+                        $(".addBtn").addClass("btn-success");
+                    
+                
+                        
+                    }
+                });
+                   
+                  
+               
+                   
+                }
+            });
 
       }
 
