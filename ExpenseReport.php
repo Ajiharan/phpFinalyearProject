@@ -1,8 +1,8 @@
 <?php 
 session_start();
-if(!isset($_SESSION['uid'])){
+if(!isset($_SESSION['aid'])){
     
-    header("Location:./AdminLogin.php"); 
+    header("Location:./UserLogin.php"); 
     exit();
 } 
   
@@ -19,7 +19,7 @@ if(!isset($_SESSION['uid'])){
    
     <body>
         <?php 
-            include('./header/AdminHeader.php')
+            include('./header/userHeader.php')
         ?>
         <div class="container-fluid adminHome">
             <div class="row">

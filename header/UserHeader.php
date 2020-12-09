@@ -27,20 +27,44 @@
       </li>
       <?php if(isset($_SESSION['uname'])) { ?>
         <li class="nav-item">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Views & Entries</a>
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menus</a>
           <div class="dropdown-menu drp" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="../../phpFinalYearProject/Suppliers.php"> Suppliers</a>
             <a class="dropdown-item" href="../../phpFinalYearProject/Material.php">Materials</a>
             <a class="dropdown-item" href="../../phpFinalYearProject/Client.php">Clients</a>
             <a class="dropdown-item" href="../../phpFinalYearProject/Tenders.php">Tenders</a>
             <a class="dropdown-item" href="../../phpFinalYearProject/AwardedProject.php">projects</a>
-            <a class="dropdown-item" href="../../phpFinalYearProject/Bills.php">Bills</a>
+           
             <a class="dropdown-item" href="../../phpFinalYearProject/Labours.php">Labours</a>
+
+            <a class="dropdown-item" href="../../phpFinalYearProject/Bills.php">Bills</a>
             <a class="dropdown-item" href="../../phpFinalYearProject/MaterialPurchase.php">Material Purchase</a>
             <a class="dropdown-item" href="../../phpFinalYearProject/LabourPayment.php">Labour payment</a>
             <a class="dropdown-item" href="../../phpFinalYearProject/MachineryRent.php">Machinery Rents</a>
             <a class="dropdown-item" href="../../phpFinalYearProject/Other.php">Other Expenses</a>
         </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="../../phpFinalYearProject/Bills.php">
+            Bills
+          </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Expenses</a>
+        <div class="dropdown-menu " aria-labelledby="dropdownMenuButton1" id="drp1">
+           
+            <a class="dropdown-item" href="../../phpFinalYearProject/MaterialPurchase.php">Material Purchase</a>
+            <a class="dropdown-item" href="../../phpFinalYearProject/LabourPayment.php">Labour payment</a>
+            <a class="dropdown-item" href="../../phpFinalYearProject/MachineryRent.php">Machinery Rents</a>
+            <a class="dropdown-item" href="../../phpFinalYearProject/Other.php">Other Expenses</a>
+        </div>
+        </li>
+      <?php } ?>
+      <?php if(isset($_SESSION['aid'])) { ?>
+        <li class="nav-item">
+            <a class="nav-link"  href="../../phpFinalYearProject/ExpenseReport.php">
+              Expense report
+            </a>
         </li>
       <?php } ?>
     </ul>

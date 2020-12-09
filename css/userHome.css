@@ -28,8 +28,13 @@
   justify-content: center;
 }
 
+.projectContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
 .cardContainers {
   display: flex;
+
   flex-direction: column;
   padding: 20px;
   align-items: center;
@@ -39,6 +44,7 @@
   margin-top: 40px;
   margin-bottom: 20px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }

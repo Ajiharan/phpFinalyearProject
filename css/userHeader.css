@@ -41,6 +41,15 @@ body::-webkit-scrollbar-thumb {
   width: 50px;
   object-fit: contain;
 }
+#drp1 {
+  margin-left: 250px !important;
+}
+
+#drp1 a :hover {
+  background-color: rgb(53, 51, 51) !important;
+  opacity: 0.8;
+  color: white;
+}
 
 @media only screen and (min-width: 994px) {
   #navbarNav {

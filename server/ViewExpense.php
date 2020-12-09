@@ -12,7 +12,11 @@
             <th scope='col'>project Name</th>
             <th scope='col'>expenseType</th>
             <th scope='col'>Amount</th>
-            <th scope='col'>Date</th>
+            <th scope='col'>Date</th>         
+			<th scope='col'>CreatedDate</th>
+            <th scope='col'>ModifiedDate</th>
+            <th scope='col'>CreatedBy</th>
+            <th scope='col'>ModifiedBy</th>
             
         </tr>
     </thead> 
@@ -48,7 +52,11 @@
             <td>".$projectname."</td>
             <td>".$row->expenseType."</td>
             <td>".$row->amount."</td>
-            <td>".$row->cdate."</td>";
+            <td>".$row->cdate."</td>
+            <td>".$row->createdAt."</td>
+            <td>".$row->modifiedAt."</td>
+            <td>".$row->createdBy."</td>
+            <td>".$row->updatedBy."</td>"  ;
     
             
        }

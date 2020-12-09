@@ -6,7 +6,7 @@
 
 <?php 
    
-    $result="<div class=' text-light'>";
+    $result="<div class=' text-light projectContainer'>";
     $currentDate = date('Y-m-d');
  try{
     
@@ -29,12 +29,13 @@
         }
 
 
-        $result.= "<div class='card bg-dark mt-4 p-4 mycards'>
-                <div class='cardContainers'>
-                    <p class='lead bg-danger p-2'>Project name : ".$tname."</p>
-                    <p class='lead'>Estimated value : LKR.".$row->estimatedValue."</p>
-                </div>             
-            </div>";
+        $result.= "<div class='card bg-dark m-4 p-4 mycards'>
+                    <div class='cardContainers'>
+                        <p class='lead bg-danger p-2'>Project name : ".$tname."</p>
+                        <p class='lead'>Estimated value : LKR.".$row->estimatedValue."</p>
+                        <p class='lead'>End Date : ".$row->projectEndDate."</p>
+                    </div>             
+                  </div>";
     
             
        }
