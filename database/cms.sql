@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2020 at 08:53 AM
+-- Generation Time: Dec 09, 2020 at 03:48 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -34,7 +34,11 @@ CREATE TABLE `awardedprojects` (
   `projectStartDate` varchar(50) NOT NULL,
   `projectEndDate` varchar(50) NOT NULL,
   `retentionAmount` double NOT NULL,
-  `retentionDueDate` varchar(50) NOT NULL
+  `retentionDueDate` varchar(50) NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -48,7 +52,11 @@ CREATE TABLE `bills` (
   `projectId` bigint(20) NOT NULL,
   `billNo` int(11) NOT NULL,
   `receivedAmount` double NOT NULL,
-  `receivedDate` varchar(50) NOT NULL
+  `receivedDate` varchar(50) NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -62,7 +70,11 @@ CREATE TABLE `clients` (
   `name` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
   `phone` varchar(20) NOT NULL,
-  `email` varchar(50) DEFAULT NULL
+  `email` varchar(50) DEFAULT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -76,7 +88,12 @@ CREATE TABLE `expenses` (
   `projectId` bigint(20) NOT NULL,
   `expenseType` varchar(50) NOT NULL,
   `amount` double NOT NULL,
-  `cdate` varchar(50) NOT NULL
+  `cdate` varchar(50) NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL,
+  `tid` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -87,18 +104,22 @@ CREATE TABLE `expenses` (
 
 CREATE TABLE `expensetype` (
   `id` bigint(20) NOT NULL,
-  `type` varchar(50) NOT NULL
+  `type` varchar(50) NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `expensetype`
 --
 
-INSERT INTO `expensetype` (`id`, `type`) VALUES
-(3, ' Machinery Rent'),
-(1, ' Material Purchase'),
-(2, 'Labour Charges'),
-(4, 'Other Expenses');
+INSERT INTO `expensetype` (`id`, `type`, `createdAt`, `modifiedAt`, `createdBy`, `updatedBy`) VALUES
+(3, ' Machinery Rent', '2020-12-06 21:16:00', '2020-12-06 23:17:08', 'haran', 'haran'),
+(1, ' Material Purchase', '2020-12-06 21:16:00', '2020-12-06 23:17:15', 'haran', 'haran'),
+(2, 'Labour Charges', '2020-12-06 21:16:00', '2020-12-06 23:17:21', 'haran', 'haran'),
+(4, 'Other Expenses', '2020-12-06 21:16:00', '2020-12-06 23:17:27', 'haran', 'haran');
 
 -- --------------------------------------------------------
 
@@ -112,7 +133,12 @@ CREATE TABLE `labourpayment` (
   `labourId` bigint(20) NOT NULL,
   `noOfWorkers` int(11) NOT NULL,
   `payment` double NOT NULL,
-  `paidOn` varchar(200) NOT NULL
+  `paidOn` varchar(200) NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL,
+  `ndate` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -126,8 +152,19 @@ CREATE TABLE `labours` (
   `name` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
   `phone` varchar(20) NOT NULL,
-  `workType` varchar(50) DEFAULT NULL
+  `workType` varchar(50) DEFAULT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `labours`
+--
+
+INSERT INTO `labours` (`id`, `name`, `address`, `phone`, `workType`, `createdAt`, `modifiedAt`, `createdBy`, `updatedBy`) VALUES
+(5, 'Baskaran Ajiharan', 'earlalai,west earlalai', '0776377435', 'plumber', '2020-12-08 02:01:35', '2020-12-08 02:01:35', 'admin', NULL);
 
 -- --------------------------------------------------------
 
@@ -137,16 +174,20 @@ CREATE TABLE `labours` (
 
 CREATE TABLE `machineries` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(50) NOT NULL
+  `name` varchar(50) NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `machineries`
 --
 
-INSERT INTO `machineries` (`id`, `name`) VALUES
-(1, 'Roller'),
-(2, 'JCB');
+INSERT INTO `machineries` (`id`, `name`, `createdAt`, `modifiedAt`, `createdBy`, `updatedBy`) VALUES
+(1, 'Roller', '2020-12-06 21:16:52', '2020-12-06 23:16:01', 'haran', 'haran'),
+(2, 'JCB', '2020-12-06 21:16:52', '2020-12-06 23:16:18', 'haran', 'haran');
 
 -- --------------------------------------------------------
 
@@ -160,7 +201,12 @@ CREATE TABLE `machineryrents` (
   `machineryId` bigint(20) NOT NULL,
   `hourlyPayment` double NOT NULL,
   `noOfHrs` int(11) NOT NULL,
-  `payment` double NOT NULL
+  `payment` double NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL,
+  `ndate` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -175,7 +221,12 @@ CREATE TABLE `materialpurchase` (
   `materialId` bigint(20) NOT NULL,
   `unitPrice` double NOT NULL,
   `qty` int(11) NOT NULL,
-  `totalAmount` double NOT NULL
+  `totalAmount` double NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL,
+  `ndate` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -186,15 +237,20 @@ CREATE TABLE `materialpurchase` (
 
 CREATE TABLE `materials` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(50) DEFAULT NULL
+  `name` varchar(50) DEFAULT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `materials`
 --
 
-INSERT INTO `materials` (`id`, `name`) VALUES
-(5, 'cotton');
+INSERT INTO `materials` (`id`, `name`, `createdAt`, `modifiedAt`, `createdBy`, `updatedBy`) VALUES
+(9, 'Cotton', '2020-12-07 00:46:31', '2020-12-08 08:58:42', 'admin', 'admin'),
+(10, 'silk', '2020-12-08 08:57:48', '2020-12-08 08:57:54', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -207,7 +263,12 @@ CREATE TABLE `othertypes` (
   `projectId` bigint(20) NOT NULL,
   `description` varchar(255) NOT NULL,
   `amount` double NOT NULL,
-  `cdate` varchar(50) NOT NULL
+  `cdate` varchar(50) NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL,
+  `ndate` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -218,16 +279,20 @@ CREATE TABLE `othertypes` (
 
 CREATE TABLE `storeitems` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(50) NOT NULL
+  `name` varchar(50) NOT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `storeitems`
 --
 
-INSERT INTO `storeitems` (`id`, `name`) VALUES
-(1, 'Water tank'),
-(2, 'Driller');
+INSERT INTO `storeitems` (`id`, `name`, `createdAt`, `modifiedAt`, `createdBy`, `updatedBy`) VALUES
+(1, 'Water tank', '2020-12-06 21:20:18', '2020-12-06 23:16:32', 'haran', 'haran'),
+(2, 'Driller', '2020-12-06 21:20:18', '2020-12-06 23:16:37', 'haran', 'haran');
 
 -- --------------------------------------------------------
 
@@ -240,8 +305,20 @@ CREATE TABLE `suppliers` (
   `name` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
   `phone` varchar(20) NOT NULL,
-  `vehicleNo` varchar(50) DEFAULT NULL
+  `vehicleNo` varchar(50) DEFAULT NULL,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `name`, `address`, `phone`, `vehicleNo`, `createdAt`, `modifiedAt`, `createdBy`, `updatedBy`) VALUES
+(25, 'Thanusha krishnamoorthy ', 'earlalai,west earlalai', '0776377435', 'sdad', '2020-12-07 00:08:05', '2020-12-08 08:49:59', 'haran', 'admin'),
+(26, 'Baskaran Ajiharan', 'earlalai,west earlalai', '0776377435', 'asd', '2020-12-08 08:49:35', '2020-12-08 08:51:20', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -256,7 +333,11 @@ CREATE TABLE `tenders` (
   `projectValue` double NOT NULL,
   `duration` double NOT NULL,
   `security_fee` double NOT NULL,
-  `isAwarded` tinyint(1) DEFAULT 0
+  `isAwarded` tinyint(1) DEFAULT 0,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `createdBy` varchar(200) NOT NULL,
+  `updatedBy` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -271,17 +352,18 @@ CREATE TABLE `users` (
   `emailId` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `isActive` tinyint(1) DEFAULT 1,
-  `userType` int(11) DEFAULT 1
+  `userType` int(11) DEFAULT 1,
+  `createdAt` datetime DEFAULT current_timestamp(),
+  `modifiedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `emailId`, `password`, `isActive`, `userType`) VALUES
-(1, 'admin', 'admin@gmail.com', 'admin', 1, 2),
-(12, 'haran', 'haran@gmail.com', 'haran', 1, 1),
-(15, 'nimal', 'nimal@gmail.com', '1111', 1, 1);
+INSERT INTO `users` (`id`, `username`, `emailId`, `password`, `isActive`, `userType`, `createdAt`, `modifiedAt`) VALUES
+(1, 'admin', 'admin@gmail.com', 'admin', 1, 2, '2020-12-06 21:26:21', '2020-12-06 21:26:21'),
+(16, 'haran', 'haran@gmail.com', 'haran', 1, 1, '2020-12-06 22:48:48', '2020-12-06 22:48:48');
 
 --
 -- Indexes for dumped tables
@@ -402,37 +484,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `awardedprojects`
 --
 ALTER TABLE `awardedprojects`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `labourpayment`
 --
 ALTER TABLE `labourpayment`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `labours`
 --
 ALTER TABLE `labours`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `machineries`
@@ -444,25 +526,25 @@ ALTER TABLE `machineries`
 -- AUTO_INCREMENT for table `machineryrents`
 --
 ALTER TABLE `machineryrents`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `materialpurchase`
 --
 ALTER TABLE `materialpurchase`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `othertypes`
 --
 ALTER TABLE `othertypes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `storeitems`
@@ -474,19 +556,19 @@ ALTER TABLE `storeitems`
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tenders`
 --
 ALTER TABLE `tenders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables

@@ -37,11 +37,8 @@
            
             <a class="dropdown-item" href="../../phpFinalYearProject/Labours.php">Labours</a>
 
-            <a class="dropdown-item" href="../../phpFinalYearProject/Bills.php">Bills</a>
-            <a class="dropdown-item" href="../../phpFinalYearProject/MaterialPurchase.php">Material Purchase</a>
-            <a class="dropdown-item" href="../../phpFinalYearProject/LabourPayment.php">Labour payment</a>
-            <a class="dropdown-item" href="../../phpFinalYearProject/MachineryRent.php">Machinery Rents</a>
-            <a class="dropdown-item" href="../../phpFinalYearProject/Other.php">Other Expenses</a>
+         
+           
         </div>
         </li>
         <li class="nav-item">

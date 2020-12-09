@@ -43,7 +43,7 @@
       </div>";
        echo  $result;
     }else{
-       echo "<h4 class='text-center text-danger'>Records are not available</h4>";
+       echo "<h4 class='text-center text-danger'>Projects are not available</h4>";
     }
 
     
